@@ -1,0 +1,37 @@
+<div class="displayview">
+  <div class="container position">
+    <div class="login">
+      <h1>Login</h1>
+      <hr />
+      <p>Welcome To Ichiraku Ramen</p>
+      <form action="" [formGroup]="loginForm">
+        <label for="">Email</label>
+        <input
+          type="text"
+          placeholder="example@gmail.com"
+          formControlName="email"
+        />
+        <label for="">Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <span
+          *ngIf="
+            !loginForm.get('email')?.valid && loginForm.get('email')?.touched
+          "
+          class="help-block"
+          >Please Enter a Valid email</span
+        >
+        <button (click)="login()">Login</button>
+      </form>
+    </div>
+    <div class="right">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"
+        alt="no image"
+      />
+    </div>
+  </div>
+</div>

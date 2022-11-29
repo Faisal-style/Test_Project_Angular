@@ -1,0 +1,152 @@
+.outer-div {
+  display: table;
+  background: slategray;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.mid-div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner-div {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+html {
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  margin: 50px;
+  display: flex;
+  max-width: 850px;
+  background: rgb(198, 186, 186);
+  border-radius: 15px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.displayview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(139, 133, 133);
+}
+
+.login {
+  width: 400px;
+  padding-top: 20px;
+}
+
+form {
+  width: 250px;
+  margin: 60px auto;
+  margin-top: 0;
+}
+
+h1 {
+  margin: 20px;
+  text-align: center;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+hr {
+  border-top: 2px solid #ffa12c;
+}
+
+p {
+  text-align: center;
+  margin: 10px;
+}
+
+.right img {
+  width: 450px;
+  height: 100%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+form label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px;
+}
+
+input {
+  width: 100%;
+  margin: 2px;
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+button {
+  border: none;
+  outline: none;
+  padding: 8px;
+  width: 252px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 5px;
+  background: #ff2c2c;
+}
+
+.right img {
+  width: 450px;
+  height: 100%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+button:hover {
+  background: rgba(214, 86, 64, 1);
+}
+
+@media (max-width: 880px) {
+  .container {
+    width: 100%;
+    max-width: 750px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  form {
+    width: 300px;
+    margin: 20px auto;
+  }
+
+  .login {
+    width: 400px;
+    padding: 20px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .right img {
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -7,12 +7,16 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,6 +29,7 @@ export class AuthGuard implements CanActivate {
     const userToken = localStorage.getItem('token');
 
     if (userToken) {
+      this.loggedIn.next(true);
       return true;
     } else {
       // Force Logout if there is no token

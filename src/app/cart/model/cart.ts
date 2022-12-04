@@ -1,47 +1,49 @@
 // To parse this data:
 //
-//   import { Convert, Menu } from "./file";
+//   import { Convert, Cart } from "./file";
 //
-//   const menu = Convert.toMenu(json);
+//   const cart = Convert.toCart(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface Menu {
+export interface Cart {
   data: Data;
 }
 
 export interface Data {
-  GetAllRecipes: GetAllRecipes;
+  GetOrder: GetOrder;
 }
 
-export interface GetAllRecipes {
-  data_recipes: DataRecipe[];
-}
-
-export interface DataRecipe {
+export interface GetOrder {
   id: string;
-  recipe_name: string;
-  ingredients: Ingredient[];
-  status: string;
-  description: null | string;
-  image: string;
-  price: number;
+  menu: Menu[];
+  order_status: string;
 }
 
-export interface Ingredient {
-  stock_used: number;
+export interface Menu {
+  id: string;
+  recipe_id: RecipeID;
+  amount: number;
+  note: string;
+}
+
+export interface RecipeID {
+  recipe_name: string;
+  status: string;
+  price: number;
+  image: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-  public static toMenu(json: string): Menu {
-    return cast(JSON.parse(json), r('Menu'));
+  public static toCart(json: string): Cart {
+    return cast(JSON.parse(json), r('Cart'));
   }
 
-  public static menuToJson(value: Menu): string {
-    return JSON.stringify(uncast(value, r('Menu')), null, 2);
+  public static cartToJson(value: Cart): string {
+    return JSON.stringify(uncast(value, r('Cart')), null, 2);
   }
 }
 
@@ -193,26 +195,32 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-  Menu: o([{ json: 'data', js: 'data', typ: r('Data') }], false),
-  Data: o(
-    [{ json: 'GetAllRecipes', js: 'GetAllRecipes', typ: r('GetAllRecipes') }],
-    false
-  ),
-  GetAllRecipes: o(
-    [{ json: 'data_recipes', js: 'data_recipes', typ: a(r('DataRecipe')) }],
-    false
-  ),
-  DataRecipe: o(
+  Cart: o([{ json: 'data', js: 'data', typ: r('Data') }], false),
+  Data: o([{ json: 'GetOrder', js: 'GetOrder', typ: r('GetOrder') }], false),
+  GetOrder: o(
     [
       { json: 'id', js: 'id', typ: '' },
-      { json: 'recipe_name', js: 'recipe_name', typ: '' },
-      { json: 'ingredients', js: 'ingredients', typ: a(r('Ingredient')) },
-      { json: 'status', js: 'status', typ: '' },
-      { json: 'description', js: 'description', typ: u(null, '') },
-      { json: 'image', js: 'image', typ: '' },
-      { json: 'price', js: 'price', typ: 0 },
+      { json: 'menu', js: 'menu', typ: a(r('Menu')) },
+      { json: 'order_status', js: 'order_status', typ: '' },
     ],
     false
   ),
-  Ingredient: o([{ json: 'stock_used', js: 'stock_used', typ: 0 }], false),
+  Menu: o(
+    [
+      { json: 'id', js: 'id', typ: '' },
+      { json: 'recipe_id', js: 'recipe_id', typ: r('RecipeID') },
+      { json: 'amount', js: 'amount', typ: 0 },
+      { json: 'note', js: 'note', typ: '' },
+    ],
+    false
+  ),
+  RecipeID: o(
+    [
+      { json: 'recipe_name', js: 'recipe_name', typ: '' },
+      { json: 'status', js: 'status', typ: '' },
+      { json: 'price', js: 'price', typ: 0 },
+      { json: 'image', js: 'image', typ: '' },
+    ],
+    false
+  ),
 };

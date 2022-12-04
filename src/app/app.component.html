@@ -1,1 +1,36 @@
+<mat-toolbar class="header" id="abs1">
+  <span>Restaurant</span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+  <span *ngIf="isLoggedIn$ | async as isLoggedIn; else home"
+    ><button mat-icon-button [matMenuTriggerFor]="menu" class="buttcolormenu">
+      <mat-icon class="buttcolortitik">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/menu">
+        <mat-icon>restaurant_menu</mat-icon>
+        <span>Menu</span>
+      </button>
+      <button mat-menu-item routerLink="/cart">
+        <mat-icon>add_shopping_cart</mat-icon>
+        <span>Cart</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu></span
+  >
+  <ng-template #home>
+    <ul>
+      <li><a routerLink="/home">Home</a></li>
+      <li><a routerLink="/login">Login</a></li>
+    </ul>
+
+    <!-- <span class="lebar">Home</span>
+    <span>Login</span> -->
+  </ng-template>
+  <br />
+</mat-toolbar>
+
 <router-outlet></router-outlet>

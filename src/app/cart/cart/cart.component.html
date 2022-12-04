@@ -1,0 +1,27 @@
+<div class="divContent">
+  <h1 style="text-align: center">Cart List</h1>
+  <div>
+    <div *ngFor="let menu of alldata">
+      <div class="flexcss">
+        <img [src]="menu.recipe_id.image" alt="" class="avatar" />
+        <div style="font-size: 20pt; word-wrap: break-word; width: 200px">
+          {{ menu.recipe_id.recipe_name }} <br /><br />
+          <div style="font-size: 15pt">
+            Price : Rp. {{ menu.recipe_id.price }}
+          </div>
+        </div>
+
+        <input type="text" value="{{ menu.amount }}" disabled />
+        <button (click)="deletecart(menu.id)">Hapus</button>
+      </div>
+      <hr class="solid" />
+    </div>
+  </div>
+  <br />
+  <button
+    (click)="ordernow(orderId)"
+    style="margin-left: 69%; background-color: aquamarine; color: black"
+  >
+    Checkout
+  </button>
+</div>

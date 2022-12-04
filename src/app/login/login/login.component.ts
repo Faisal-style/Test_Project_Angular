@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       .subscribe((resp) => {
         console.log(resp);
         if (resp) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/menu']);
         }
       });
   }

@@ -1,0 +1,20 @@
+/* .divContent {
+  margin: auto;
+  padding-top: 50px;
+  width: 80%;
+} */
+
+h1 {
+  position: fixed;
+  padding-top: 320px;
+  padding-left: 170px;
+  color: #f6e7e7;
+  font-size: 2cm;
+  font-style: italic;
+}
+
+.latar {
+  background-image: url("https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000");
+  height: 100%;
+  width: 100%;
+}

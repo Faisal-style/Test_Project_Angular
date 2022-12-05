@@ -3,7 +3,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { gql } from 'apollo-angular';
 import { Apollo } from 'apollo-angular';
 import { SubSink } from 'subsink';
-import { GetOrder, Menu, RecipeID } from '../model/cart';
 
 const Get_myData = gql`
   query {
@@ -21,6 +20,7 @@ const Get_myData = gql`
         note
       }
       order_status
+      total_price
     }
   }
 `;
@@ -35,6 +35,7 @@ export class CartComponent implements OnInit {
   // alldata: Menu[] = [];
   alldata: any;
   orderId: any;
+  totalprice: any;
   constructor(private authService: AuthService, private apollo: Apollo) {}
 
   ngOnInit(): void {
@@ -47,8 +48,10 @@ export class CartComponent implements OnInit {
         if (response) {
           this.alldata = response.data.GetOrder.menu;
           this.orderId = response.data.GetOrder.id;
+          this.totalprice = response.data.GetOrder.total_price;
           console.log(this.alldata);
           console.log(this.orderId);
+          console.log(this.totalprice);
         }
       });
   }
@@ -58,6 +61,7 @@ export class CartComponent implements OnInit {
     this.subs.sink = this.authService.deletecart(id).subscribe((resp) => {
       console.log(resp);
     });
+    window.location.reload();
   }
 
   ordernow(id: any) {
@@ -66,8 +70,12 @@ export class CartComponent implements OnInit {
       console.log(id);
       this.subs.sink = this.authService.ordernow(id).subscribe((resp) => {
         console.log(resp);
-        window.location.reload();
       });
+      window.location.reload();
     }
+  }
+
+  nullCart() {
+    return this.alldata?.length ? false : true;
   }
 }

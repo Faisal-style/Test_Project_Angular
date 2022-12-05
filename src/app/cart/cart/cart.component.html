@@ -7,7 +7,7 @@
         <div style="font-size: 20pt; word-wrap: break-word; width: 200px">
           {{ menu.recipe_id.recipe_name }} <br /><br />
           <div style="font-size: 15pt">
-            Price : Rp. {{ menu.recipe_id.price }}
+            Price : Rp. {{ menu.recipe_id.price * menu.amount }}
           </div>
         </div>
 
@@ -18,10 +18,18 @@
     </div>
   </div>
   <br />
-  <button
-    (click)="ordernow(orderId)"
-    style="margin-left: 69%; background-color: aquamarine; color: black"
-  >
-    Checkout
-  </button>
+  <div class="btn">
+    <h2>Total Price : Rp.{{ totalprice }}</h2>
+    <button
+      (click)="ordernow(orderId)"
+      style="
+        margin-left: 69%;
+        background-color: rgb(38, 24, 234);
+        color: rgb(255, 255, 255);
+      "
+      [disabled]="nullCart()"
+    >
+      Checkout
+    </button>
+  </div>
 </div>

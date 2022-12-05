@@ -5,6 +5,13 @@
   width: 80%;
 }
 
+.divCheckout {
+  margin: auto;
+  padding-top: 50px;
+  margin-top: 50px;
+  width: 50%;
+}
+
 .avatar {
   vertical-align: middle;
   width: 100px;
@@ -45,4 +52,14 @@ hr.solid {
   border-top: 3px solid #bbb;
   width: 60%;
   align-items: flex-start;
+}
+
+.btn {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  gap: 30px;
+  padding-left: 250px;
+  padding-right: 240px;
 }

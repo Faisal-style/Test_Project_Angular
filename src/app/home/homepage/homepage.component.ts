@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { gql, Apollo } from 'apollo-angular';
-// import { menu } from '../model/menu';
-import { SubSink } from 'subsink';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
-import { DataRecipe, Ingredient, Menu } from '../model/menu';
+import { DataRecipe } from '../model/menu';
+import Swal from 'sweetalert2';
 
 const Get_myData = gql`
   query {
@@ -35,7 +34,6 @@ interface Payload {
   styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent implements OnInit {
-  private subs = new SubSink();
   addtocartform: FormGroup = this.initFormGroup();
   alldata: DataRecipe[] = [];
   constructor(
@@ -67,10 +65,19 @@ export class HomepageComponent implements OnInit {
   addtocart(id: any) {
     const payload: Payload = this.addtocartform.value;
     console.log(id);
-    this.subs.sink = this.authservice
-      .addtocart(id, payload.amount, payload.note)
-      .subscribe((resp) => {
+    this.authservice.addtocart(id, payload.amount, payload.note).subscribe(
+      (resp) => {
         console.log(resp);
-      });
+        Swal.fire(
+          'Good job!',
+          'Your product has been added to cart',
+          'success'
+        );
+      },
+      (error) => {
+        Swal.fire('Oops!', `${error.message}`, 'error');
+        console.log(error.message);
+      }
+    );
   }
 }

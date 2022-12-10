@@ -1,35 +1,44 @@
-<div class="divContent">
-  <h1 style="text-align: center">Cart List</h1>
-  <div>
-    <div *ngFor="let menu of alldata">
-      <div class="flexcss">
-        <img [src]="menu.recipe_id.image" alt="" class="avatar" />
-        <div style="font-size: 20pt; word-wrap: break-word; width: 200px">
-          {{ menu.recipe_id.recipe_name }} <br /><br />
-          <div style="font-size: 15pt">
-            Price : Rp. {{ menu.recipe_id.price * menu.amount }}
-          </div>
-        </div>
+<img
+  *ngIf="loading; else cart"
+  class="loading"
+  src="../../../assets/loading.gif"
+  alt=""
+/>
 
-        <input type="text" value="{{ menu.amount }}" disabled />
-        <button (click)="deletecart(menu.id)">Hapus</button>
+<ng-template #cart>
+  <div class="divContent">
+    <h1 style="text-align: center">Cart List</h1>
+    <div>
+      <div *ngFor="let menu of alldata">
+        <div class="flexcss">
+          <img [src]="menu.recipe_id.image" alt="" class="avatar" />
+          <div style="font-size: 20pt; word-wrap: break-word; width: 200px">
+            {{ menu.recipe_id.recipe_name }} <br /><br />
+            <div style="font-size: 15pt">
+              Price : Rp. {{ menu.recipe_id.price * menu.amount }}
+            </div>
+          </div>
+
+          <input type="text" value="{{ menu.amount }}" disabled />
+          <button (click)="deletecart(menu.id)">Hapus</button>
+        </div>
+        <hr class="solid" />
       </div>
-      <hr class="solid" />
+    </div>
+    <br />
+    <div class="btn">
+      <h2>Total Price : Rp.{{ totalprice }}</h2>
+      <button
+        (click)="ordernow(orderId)"
+        style="
+          margin-left: 69%;
+          background-color: rgb(38, 24, 234);
+          color: rgb(255, 255, 255);
+        "
+        [disabled]="nullCart()"
+      >
+        Checkout
+      </button>
     </div>
   </div>
-  <br />
-  <div class="btn">
-    <h2>Total Price : Rp.{{ totalprice }}</h2>
-    <button
-      (click)="ordernow(orderId)"
-      style="
-        margin-left: 69%;
-        background-color: rgb(38, 24, 234);
-        color: rgb(255, 255, 255);
-      "
-      [disabled]="nullCart()"
-    >
-      Checkout
-    </button>
-  </div>
-</div>
+</ng-template>

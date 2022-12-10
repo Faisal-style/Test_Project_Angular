@@ -63,3 +63,8 @@ hr.solid {
   padding-left: 250px;
   padding-right: 240px;
 }
+
+.loading {
+  margin: auto;
+  display: block;
+}

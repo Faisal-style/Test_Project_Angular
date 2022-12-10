@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
   param!: any;
-  alldata: detail[] = [];
+  alldata: any;
   constructor(private apollo: Apollo, private route: ActivatedRoute) {}
 
   ngOnInit(): void {

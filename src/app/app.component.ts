@@ -25,4 +25,7 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/login']);
     this.isLoggedIn$ = this.cok;
   }
+  refresh(): void {
+    window.location.reload();
+  }
 }
